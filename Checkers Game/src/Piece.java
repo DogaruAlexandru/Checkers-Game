@@ -1,13 +1,13 @@
 public class Piece {
     private final boolean black;
     private boolean kinged;
-    private byte PosX;
-    private byte PosY;
+    private int posX;
+    private int posY;
 
-    public Piece(boolean black, byte PosX, byte PosY) {
+    public Piece(boolean black, int posX, int posY) {
         this.black = black;
-        this.PosX = PosX;
-        this.PosY = PosY;
+        this.posX = posX;
+        this.posY = posY;
         kinged = false;
     }
 
@@ -19,63 +19,63 @@ public class Piece {
         return kinged;
     }
 
-    public byte getxPos() {
-        return PosX;
+    public int getPosX() {
+        return posX;
     }
 
-    public byte getyPos() {
-        return PosY;
+    public int getPosY() {
+        return posY;
     }
 
     public void setKinged(boolean kinged) {
         this.kinged = kinged;
     }
 
-    public void setPosX(byte PosX) {
-        this.PosX = PosX;
+    public void setPosX(byte posX) {
+        this.posX = posX;
     }
 
-    public void setPosY(byte PosY) {
-        this.PosY = PosY;
+    public void setPosY(byte posY) {
+        this.posY = posY;
     }
 
     public void moveUpLeft() {
-        --PosX;
-        --PosY;
+        --posX;
+        --posY;
     }
 
     public void moveUpRight() {
-        ++PosX;
-        --PosY;
+        ++posX;
+        --posY;
     }
 
     public void moveDowsLeft() {
-        --PosX;
-        ++PosY;
+        --posX;
+        ++posY;
     }
 
     public void moveDownRight() {
-        ++PosX;
-        ++PosY;
+        ++posX;
+        ++posY;
     }
 
     public void attackMoveUpLeft() {
-        PosX -= 2;
-        PosY -= 2;
+        posX -= 2;
+        posY -= 2;
     }
 
     public void attackMoveUpRight() {
-        PosX += 2;
-        PosY -= 2;
+        posX += 2;
+        posY -= 2;
     }
 
     public void attackMoveDowsLeft() {
-        PosX -= 2;
-        PosY += 2;
+        posX -= 2;
+        posY += 2;
     }
 
     public void attackMoveDownRight() {
-        PosX += 2;
-        PosY += 2;
+        posX += 2;
+        posY += 2;
     }
 }
