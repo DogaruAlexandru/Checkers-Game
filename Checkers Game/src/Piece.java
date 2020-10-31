@@ -1,18 +1,18 @@
 public class Piece {
-    private final boolean color;//black==true, white==false
+    private final boolean black;
     private boolean kinged;
     private byte PosX;
     private byte PosY;
 
-    public Piece(boolean color, byte PosX, byte PosY) {
-        this.color = color;
+    public Piece(boolean black, byte PosX, byte PosY) {
+        this.black = black;
         this.PosX = PosX;
         this.PosY = PosY;
         kinged = false;
     }
 
-    public boolean isColor() {
-        return color;
+    public boolean isBlack() {
+        return black;
     }
 
     public boolean isKinged() {

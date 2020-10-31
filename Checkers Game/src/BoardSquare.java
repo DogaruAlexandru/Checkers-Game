@@ -1,4 +1,10 @@
 public class BoardSquare {
-    public boolean color;//0 black, 1 white
-    public boolean occupied;
+    private final boolean black;
+    private boolean occupied;//nesigur de utilitate
+
+    BoardSquare(boolean black)
+    {
+        this.black=black;
+        occupied=false;
+    }
 }
