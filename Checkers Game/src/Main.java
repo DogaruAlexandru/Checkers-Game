@@ -12,16 +12,16 @@ public class Main {
         f.setVisible(true);
         f.setResizable(false);
 
-        f.setSize(400, 400);
-        f.remove(f.getContentPane());
-        f.add(meniu);
+//        f.setSize(400, 400);
+//        f.remove(f.getContentPane());
+//        f.add(meniu);
 
-        f.setSize(800, 800);
+//        f.setSize(1000, 730);
+//
+//        f.remove(f.getContentPane());
+//        f.add(onePlayerPanel);
 
-        f.remove(f.getContentPane());
-        f.add(onePlayerPanel);
-
-        f.setSize(800, 800);
+        f.setSize(1000, 730);
         f.remove(f.getContentPane());
         f.add(twoPlayersPanel);
 
