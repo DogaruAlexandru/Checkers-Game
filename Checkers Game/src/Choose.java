@@ -19,31 +19,29 @@ public class Choose {
         menu = new MyMenu();
         onePlayerPanel = new OnePlayerPanel();
         twoPlayersPanel = new TwoPlayersPanel();
-
         panels = new JPanel();
         cardLayout = new CardLayout();
+
         panels.setLayout(cardLayout);
         panels.add(menu, "menu");
         panels.add(onePlayerPanel, "onePlayerPanel");
         panels.add(twoPlayersPanel, "twoPlayersPanel");
+
         Frame.add(panels);
     }
 
     static public void OpenMenu() {
         Frame.setSize(400, 400);
-//        cardLayout = (CardLayout) panels.getLayout();
         cardLayout.show(panels, "menu");
     }
 
     static public void OpenOnePlayerPanel() {
-        Frame.setSize(900, 700);
-//        cardLayout = (CardLayout) panels.getLayout();
+        Frame.setSize(1000, 700);
         cardLayout.show(panels, "onePlayerPanel");
     }
 
     static public void OpenTwoPlayersPanel() {
-        Frame.setSize(700, 700);
-//        cardLayout = (CardLayout) panels.getLayout();
+        Frame.setSize(1000, 700);
         cardLayout.show(panels, "twoPlayersPanel");
     }
 }
