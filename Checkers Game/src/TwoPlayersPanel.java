@@ -3,7 +3,7 @@ import java.awt.Font;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 
-class TwoPlayersPanel extends JPanel {
+public class TwoPlayersPanel extends JPanel {
     JLabel title;
 
     public TwoPlayersPanel() {
