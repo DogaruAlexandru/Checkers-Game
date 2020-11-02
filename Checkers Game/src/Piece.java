@@ -64,7 +64,7 @@ public class Piece {
         posY -= 2;
     }
 
-    public void attackMoveUpRight() {
+      public void attackMoveUpRight() {
         posX += 2;
         posY -= 2;
     }
