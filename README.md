@@ -1,2 +1,1 @@
-# Checkers Game V2.V3
- 
+# Checkers Game
