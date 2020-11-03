@@ -1,6 +1,12 @@
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import java.awt.CardLayout;
 
 public class Choose {
     static private JFrame Frame;
@@ -9,8 +15,18 @@ public class Choose {
     static private TwoPlayersPanel twoPlayersPanel;
     static private JPanel panels;
     static private CardLayout cardLayout;
+    static public Color myWhite;
+    static public Color myBlack;
+    static public Color myBrown;
+    static public Image background;
 
     Choose() {
+        try {
+            background = ImageIO.read(new File("Checkers Game\\resources\\background.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         Frame = new JFrame("Checkers");
         Frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Frame.setVisible(true);
@@ -28,6 +44,10 @@ public class Choose {
         panels.add(twoPlayersPanel, "twoPlayersPanel");
 
         Frame.add(panels);
+
+        myWhite = new Color(255, 255, 214);
+        myBlack = new Color(46, 46, 38);
+        myBrown = new Color(138,108,70);
     }
 
     static public void OpenMenu() {

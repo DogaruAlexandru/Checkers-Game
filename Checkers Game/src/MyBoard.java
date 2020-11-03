@@ -23,4 +23,7 @@ public class MyBoard {
                     boardTable[posX][posY].setPiece(new Piece(true, posX, posY));
 
     }
+    public BoardSquare[][] getBoardTable() {
+        return boardTable;
+    }
 }

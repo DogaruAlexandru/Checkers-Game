@@ -1,8 +1,9 @@
 import java.awt.Font;
+import java.awt.Graphics;
 
-import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JButton;
 
 public class MyMenu extends JPanel {
     private final JLabel title;
@@ -10,7 +11,6 @@ public class MyMenu extends JPanel {
     private final JButton twoPlayers;
 
     public MyMenu() {
-
         setLayout(null);
 
         title = new JLabel("Checkers");
@@ -31,5 +31,10 @@ public class MyMenu extends JPanel {
 
         onePlayer.addActionListener(e -> Choose.OpenOnePlayerPanel());
         twoPlayers.addActionListener(e -> Choose.OpenTwoPlayersPanel());
+    }
+
+    protected void paintComponent(Graphics g) {
+        //super.paintComponent(g);
+        g.drawImage(Choose.background, 0, 0, null);
     }
 }

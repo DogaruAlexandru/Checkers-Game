@@ -6,7 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 
 public class OnePlayerPanel extends JPanel {
-    private final MyBoard myBoard;
+    private final MyBoard board;
     private final JLabel player1;
     private final JLabel computer;
     private final JLabel score;
@@ -16,7 +16,7 @@ public class OnePlayerPanel extends JPanel {
     public OnePlayerPanel() {
         setLayout(null);
 
-        myBoard = new MyBoard();
+        board = new MyBoard();
         player1 = new JLabel("Player1");
         score = new JLabel("0-0");
         computer = new JLabel("Computer");
@@ -46,10 +46,23 @@ public class OnePlayerPanel extends JPanel {
     }
 
     protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
+        //super.paintComponent(g);
+        g.drawImage(Choose.background, 0, 0, null);
+
+        g.setColor(Choose.myBrown);
+        g.fillRect(50, 50, 560, 560);
+        g.setColor(Choose.myBlack);
         g.drawRect(50, 50, 560, 560);
         for (int index1 = 70; index1 < 590; index1 += 65)
             for (int index2 = 70; index2 < 590; index2 += 65)
-                g.drawRect(index1, index2, 65, 65);
+                if (board.getBoardTable()[(index1 - 70) / 65][(index2 - 70) / 65].isBlack()) {
+                    g.setColor(Choose.myBlack);
+                    g.fillRect(index1, index2, 65, 65);
+                } else {
+                    g.setColor(Choose.myWhite);
+                    g.fillRect(index1, index2, 65, 65);
+                }
+        g.setColor(Choose.myBlack);
+        g.drawRect(70, 70, 520, 520);
     }
 }
