@@ -26,13 +26,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="882b7207-f728-4a8c-beaa-6ee5e9ec5a1b" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Checkers Game/src/Choose.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/Choose.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Checkers Game/src/MyMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/MyMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Checkers Game/src/OnePlayerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/OnePlayerPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Checkers Game/src/TwoPlayersPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/TwoPlayersPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Checkers-Game/OnePlayerPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Checkers-Game/OnePlayerPanel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Checkers-Game/TwoPlayersPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Checkers-Game/TwoPlayersPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
