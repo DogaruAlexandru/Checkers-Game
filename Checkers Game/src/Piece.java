@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 public class Piece {
     private final boolean black;
     private boolean kinged;
@@ -64,7 +66,7 @@ public class Piece {
         posY -= 2;
     }
 
-      public void attackMoveUpRight() {
+    public void attackMoveUpRight() {
         posX += 2;
         posY -= 2;
     }
@@ -77,5 +79,17 @@ public class Piece {
     public void attackMoveDownRight() {
         posX += 2;
         posY += 2;
+    }
+
+    public void drawPiece(Graphics g, int x, int y) {
+        if (black) {
+            if (kinged)
+                g.drawImage(Choose.blackKingedPiece, x, y, null);
+            else
+                g.drawImage(Choose.blackPiece, x, y, null);
+        } else if (kinged)
+            g.drawImage(Choose.redKingedPiece, x, y, null);
+        else
+            g.drawImage(Choose.redPiece, x, y, null);
     }
 }

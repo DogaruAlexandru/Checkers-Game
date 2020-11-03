@@ -28,14 +28,12 @@
     <list default="true" id="882b7207-f728-4a8c-beaa-6ee5e9ec5a1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Checkers Game/src/Choose.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/Choose.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Checkers Game/src/MyBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/MyBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Checkers Game/src/MyMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/MyMenu.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Checkers Game/src/OnePlayerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/OnePlayerPanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Checkers Game/src/Piece.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/Piece.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Checkers Game/src/TwoPlayersPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/TwoPlayersPanel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Checkers-Game.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers-Game.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Checkers-Game/Choose.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Checkers-Game/Choose.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Checkers-Game/MyMenu.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Checkers-Game/MyMenu.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Checkers-Game/OnePlayerPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Checkers-Game/OnePlayerPanel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Checkers-Game/Piece.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Checkers-Game/Piece.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Checkers-Game/TwoPlayersPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Checkers-Game/TwoPlayersPanel.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -124,26 +122,26 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="622" y="301" width="672" height="469" key="#xdebugger.evaluate/0.0.1536.824@0.0.1536.824" timestamp="1604427072300" />
-    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1604426053893">
+    <state x="549" y="153" key="FileChooserDialogImpl" timestamp="1604431738068">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604426053893" />
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1604428240959">
+    <state x="549" y="153" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1604431738068" />
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom" timestamp="1604433159821">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604428240959" />
-    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1604428240959">
+    <state width="1493" height="210" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1604433159821" />
+    <state width="1493" height="210" key="GridCell.Tab.0.center" timestamp="1604433159821">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604428240959" />
-    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1604428240959">
+    <state width="1493" height="210" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1604433159821" />
+    <state width="1493" height="210" key="GridCell.Tab.0.left" timestamp="1604433159821">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604428240959" />
-    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1604428240959">
+    <state width="1493" height="210" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1604433159821" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right" timestamp="1604433159821">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604428240959" />
+    <state width="1493" height="210" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1604433159821" />
     <state width="1493" height="261" key="GridCell.Tab.1.bottom" timestamp="1604427161900">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -160,10 +158,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1493" height="261" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1604427161900" />
-    <state x="277" y="57" key="SettingsEditor" timestamp="1604417191672">
+    <state x="277" y="57" key="SettingsEditor" timestamp="1604432439277">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1604417191672" />
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1604432439277" />
     <state x="586" y="326" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1604179289914">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

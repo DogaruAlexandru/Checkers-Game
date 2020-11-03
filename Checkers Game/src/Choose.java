@@ -19,10 +19,18 @@ public class Choose {
     static public Color myBlack;
     static public Color myBrown;
     static public Image background;
+    static public Image redPiece;
+    static public Image redKingedPiece;
+    static public Image blackPiece;
+    static public Image blackKingedPiece;
 
     Choose() {
         try {
             background = ImageIO.read(new File("Checkers Game\\resources\\background.png"));
+            redPiece = ImageIO.read(new File("Checkers Game\\resources\\red.png"));
+            redKingedPiece = ImageIO.read(new File("Checkers Game\\resources\\redKinged.png"));
+            blackPiece = ImageIO.read(new File("Checkers Game\\resources\\black.png"));
+            blackKingedPiece = ImageIO.read(new File("Checkers Game\\resources\\blackKinged.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -47,7 +55,7 @@ public class Choose {
 
         myWhite = new Color(255, 255, 214);
         myBlack = new Color(46, 46, 38);
-        myBrown = new Color(138,108,70);
+        myBrown = new Color(138, 108, 70);
     }
 
     static public void OpenMenu() {

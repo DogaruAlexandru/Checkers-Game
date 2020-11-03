@@ -1,5 +1,4 @@
-import java.awt.Font;
-import java.awt.Graphics;
+import java.awt.*;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -51,17 +50,23 @@ public class OnePlayerPanel extends JPanel {
 
         g.setColor(Choose.myBrown);
         g.fillRect(50, 50, 560, 560);
-        g.setColor(Choose.myBlack);
+//        g.setColor(Choose.myBlack);
+        g.setColor(Color.BLACK);
         g.drawRect(50, 50, 560, 560);
         for (int index1 = 70; index1 < 590; index1 += 65)
-            for (int index2 = 70; index2 < 590; index2 += 65)
+            for (int index2 = 70; index2 < 590; index2 += 65) {
                 if (board.getBoardTable()[(index1 - 70) / 65][(index2 - 70) / 65].isBlack()) {
-                    g.setColor(Choose.myBlack);
+//                    g.setColor(Choose.myBlack);
+                    g.setColor(Color.BLACK);
                     g.fillRect(index1, index2, 65, 65);
                 } else {
                     g.setColor(Choose.myWhite);
                     g.fillRect(index1, index2, 65, 65);
                 }
+                if (board.getBoardTable()[(index1 - 70) / 65][(index2 - 70) / 65].getPiece() != null) {
+                    board.getBoardTable()[(index1 - 70) / 65][(index2 - 70) / 65].getPiece().drawPiece(g, index1, index2);
+                }
+            }
         g.setColor(Choose.myBlack);
         g.drawRect(70, 70, 520, 520);
     }
