@@ -1,6 +1,4 @@
-import java.awt.Font;
-import java.awt.Graphics;
-
+import java.awt.*;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -24,6 +22,8 @@ public class MyMenu extends JPanel {
         title.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 60));
         onePlayer.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
         twoPlayers.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
+
+        title.setForeground(Color.black);
 
         add(onePlayer);
         add(twoPlayers);

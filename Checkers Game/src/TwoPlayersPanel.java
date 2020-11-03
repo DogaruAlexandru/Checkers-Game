@@ -1,5 +1,6 @@
-import java.awt.*;
-
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Color;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -34,6 +35,10 @@ public class TwoPlayersPanel extends JPanel {
         reset.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
         back.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
 
+        player1.setForeground(Color.black);
+        score.setForeground(Color.black);
+        player2.setForeground(Color.black);
+
         add(player1);
         add(score);
         add(player2);
@@ -67,7 +72,7 @@ public class TwoPlayersPanel extends JPanel {
                     board.getBoardTable()[(index1 - 70) / 65][(index2 - 70) / 65].getPiece().drawPiece(g, index1, index2);
                 }
             }
-        g.setColor(Choose.myBlack);
+        g.setColor(Color.BLACK);
         g.drawRect(70, 70, 520, 520);
     }
 }

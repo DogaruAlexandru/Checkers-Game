@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -16,13 +15,14 @@ public class Choose {
     static private JPanel panels;
     static private CardLayout cardLayout;
     static public Color myWhite;
-    static public Color myBlack;
     static public Color myBrown;
     static public Image background;
     static public Image redPiece;
     static public Image redKingedPiece;
     static public Image blackPiece;
     static public Image blackKingedPiece;
+    static public Image selected;
+    static public Image possible;
 
     Choose() {
         try {
@@ -31,6 +31,8 @@ public class Choose {
             redKingedPiece = ImageIO.read(new File("Checkers Game\\resources\\redKinged.png"));
             blackPiece = ImageIO.read(new File("Checkers Game\\resources\\black.png"));
             blackKingedPiece = ImageIO.read(new File("Checkers Game\\resources\\blackKinged.png"));
+            selected = ImageIO.read(new File("Checkers Game\\resources\\selected.png"));
+            possible = ImageIO.read(new File("Checkers Game\\resources\\possible.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +56,6 @@ public class Choose {
         Frame.add(panels);
 
         myWhite = new Color(255, 255, 214);
-        myBlack = new Color(46, 46, 38);
         myBrown = new Color(138, 108, 70);
     }
 

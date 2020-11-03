@@ -1,14 +1,13 @@
 public class BoardSquare {
     private final boolean black;
     private boolean possibleMove;
+    private boolean selected;
     private Piece piece;
-
-    //nesigur de utilizare
-    //variabila care ajuta la gasirea miscarilor posibile
 
     BoardSquare(boolean black) {
         this.black = black;
-        possibleMove = false;//ajutor la afisare
+        possibleMove = false;
+        selected = false;
         piece = null;
     }
 
@@ -20,12 +19,20 @@ public class BoardSquare {
         return possibleMove;
     }
 
+    public boolean isSelected() {
+        return selected;
+    }
+
     public Piece getPiece() {
         return piece;
     }
 
     public void setPossibleMove(boolean possibleMove) {
         this.possibleMove = possibleMove;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     public void setPiece(Piece piece) {
