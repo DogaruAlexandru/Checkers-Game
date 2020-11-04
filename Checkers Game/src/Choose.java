@@ -15,6 +15,7 @@ public class Choose {
     static private JPanel panels;
     static private CardLayout cardLayout;
     static public Color myWhite;
+    static public Color myBlack;
     static public Color myBrown;
     static public Image background;
     static public Image redPiece;
@@ -56,6 +57,7 @@ public class Choose {
         Frame.add(panels);
 
         myWhite = new Color(255, 255, 214);
+        myBlack = new Color(61, 61, 51);
         myBrown = new Color(138, 108, 70);
     }
 

@@ -1,11 +1,13 @@
+import java.util.Vector;
+
 public class MyBoard {
     private BoardSquare[][] boardTable;
-    private int whitePiecesLeft;
-    private int blackPiecesLeft;
+    public Vector<Piece> redPieces;
+    public Vector<Piece> blackPieces;
 
     public MyBoard() {
-        whitePiecesLeft = 12;
-        blackPiecesLeft = 12;
+        redPieces = new Vector<>(12);
+        blackPieces = new Vector<>(12);
 
         boardTable = new BoardSquare[8][8];
         for (int index1 = 0; index1 < 8; ++index1)
@@ -14,14 +16,15 @@ public class MyBoard {
                     boardTable[index1][index2] = new BoardSquare(false);
                 else
                     boardTable[index1][index2] = new BoardSquare(true);
-
         for (int posY = 0; posY < 3; ++posY)
             for (int posX = 0; posX < 8; ++posX)
-                if ((posY + posX) % 2 == 0)
+                if ((posY + posX) % 2 == 0) {
                     boardTable[posX][posY + 5].setPiece(new Piece(false));
-                else
+                    redPieces.add(boardTable[posX][posY + 5].getPiece());
+                } else {
                     boardTable[posX][posY].setPiece(new Piece(true));
-
+                    blackPieces.add(boardTable[posX][posY].getPiece());
+                }
     }
 
     public BoardSquare[][] getBoardTable() {
@@ -94,6 +97,45 @@ public class MyBoard {
             else
                 findPossibleAttacksUp(xIndex, yIndex);
         }
+    }
+
+    private boolean existPossibleAttacksDown(int xIndex, int yIndex) {
+        if (yIndex < 7) {
+            if (xIndex > 1 && boardTable[xIndex - 2][yIndex + 2].getPiece() == null &&
+                    boardTable[xIndex - 1][yIndex + 1].getPiece() != null &&
+                    boardTable[xIndex - 1][yIndex + 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack())
+                return true;
+            if (xIndex < 7 && boardTable[xIndex + 2][yIndex + 2].getPiece() == null &&
+                    boardTable[xIndex + 1][yIndex + 1].getPiece() != null &&
+                    boardTable[xIndex + 1][yIndex + 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack())
+                return true;
+        }
+        return false;
+    }
+
+    private boolean existPossibleAttacksUp(int xIndex, int yIndex) {
+        if (yIndex > 1) {
+            boolean found = false;
+            if (xIndex > 1 && boardTable[xIndex - 2][yIndex - 2].getPiece() == null &&
+                    boardTable[xIndex - 1][yIndex - 1].getPiece() != null &&
+                    boardTable[xIndex - 1][yIndex - 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack())
+                return true;
+            if (xIndex < 7 && boardTable[xIndex + 1][yIndex - 1].getPiece() == null &&
+                    boardTable[xIndex + 1][yIndex - 1].getPiece() != null &&
+                    boardTable[xIndex + 1][yIndex - 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack())
+                return true;
+        }
+        return false;
+    }
+
+    public boolean existPossibleAttacks(int xIndex, int yIndex) {
+        if (boardTable[xIndex][yIndex].getPiece().isKinged())
+            return (existPossibleAttacksDown(xIndex, yIndex) || existPossibleAttacksUp(xIndex, yIndex));
+
+        else if (boardTable[xIndex][yIndex].getPiece().isBlack())
+            return existPossibleAttacksDown(xIndex, yIndex);
+        else
+            return existPossibleAttacksUp(xIndex, yIndex);
     }
 
     public void resetFlags() {
