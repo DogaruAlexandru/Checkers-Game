@@ -1,13 +1,11 @@
-import java.util.Vector;
-
 public class MyBoard {
     private BoardSquare[][] boardTable;
-    private Vector<Piece> redPieces;
-    private Vector<Piece> blackPieces;
+    private int redPieces;
+    private int blackPieces;
 
     public MyBoard() {
-        redPieces = new Vector<>(12);
-        blackPieces = new Vector<>(12);
+        redPieces = 12;
+        blackPieces = 12;
 
         boardTable = new BoardSquare[8][8];
         for (int index1 = 0; index1 < 8; ++index1)
@@ -18,24 +16,21 @@ public class MyBoard {
                     boardTable[index1][index2] = new BoardSquare(true);
         for (int posY = 0; posY < 3; ++posY)
             for (int posX = 0; posX < 8; ++posX)
-                if ((posY + posX) % 2 == 0) {
+                if ((posY + posX) % 2 == 0)
                     boardTable[posX][posY + 5].setPiece(new Piece(false));
-                    redPieces.add(boardTable[posX][posY + 5].getPiece());
-                } else {
+                else
                     boardTable[posX][posY].setPiece(new Piece(true));
-                    blackPieces.add(boardTable[posX][posY].getPiece());
-                }
     }
 
     public BoardSquare[][] getBoardTable() {
         return boardTable;
     }
 
-    public Vector<Piece> getRedPieces() {
+    public int getRedPieces() {
         return redPieces;
     }
 
-    public Vector<Piece> getBlackPieces() {
+    public int getBlackPieces() {
         return blackPieces;
     }
 
@@ -189,9 +184,9 @@ public class MyBoard {
         boardTable[xIndexNew][yIndexNew].setPiece(boardTable[xIndexOld][yIndexOld].getPiece());
         boardTable[xIndexOld][yIndexOld].setPiece(null);
         if (boardTable[(xIndexOld - xIndexNew) / 2 + xIndexNew][(yIndexOld - yIndexNew) / 2 + yIndexNew].getPiece().isBlack())
-            blackPieces.remove(boardTable[(xIndexOld - xIndexNew) / 2 + xIndexNew][(yIndexOld - yIndexNew) / 2 + yIndexNew].getPiece());
+            --blackPieces;
         else
-            redPieces.remove(boardTable[(xIndexOld - xIndexNew) / 2 + xIndexNew][(yIndexOld - yIndexNew) / 2 + yIndexNew].getPiece());
+            --redPieces;
         boardTable[(xIndexOld - xIndexNew) / 2 + xIndexNew][(yIndexOld - yIndexNew) / 2 + yIndexNew].setPiece(null);
     }
 }

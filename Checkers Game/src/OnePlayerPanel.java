@@ -1,23 +1,23 @@
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Color;
-import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 
 public class OnePlayerPanel extends JPanel {
-    private final MyBoard board;
+    private MyBoard board;
     private final JLabel player1;
     private final JLabel computer;
     private final JLabel score;
     private final JButton reset;
     private final JButton back;
     private boolean blackTurn;
-    private Point click;
+    private boolean gameEnded;
+    private int clickXIndex;
+    private int clickYIndex;
 
     public OnePlayerPanel() {
         setLayout(null);
@@ -29,7 +29,7 @@ public class OnePlayerPanel extends JPanel {
         reset = new JButton("Reset");
         back = new JButton("Back");
         blackTurn = true;
-        click = new Point();
+        gameEnded = false;
 
         player1.setBounds(730, 150, 180, 50);
         score.setBounds(765, 200, 55, 50);
@@ -54,7 +54,7 @@ public class OnePlayerPanel extends JPanel {
         add(back);
 
         back.addActionListener(e -> Choose.OpenMenu());
-        reset.addActionListener(e -> Choose.OpenTwoPlayersPanel());
+        reset.addActionListener(e -> reset());
 
         if (blackTurn) {//nu inteleg de ce indicii nu sunt invers
             board.getBoardTable()[1][2].setPossibleMove(true);
@@ -70,67 +70,141 @@ public class OnePlayerPanel extends JPanel {
 
         addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                if (e.getX() > 70 && e.getY() > 70 && e.getX() < 590 && e.getY() < 590)
-                    if (board.getBoardTable()[(e.getX() - 70) / 65][(e.getY() - 70) / 65].isPossibleMove()) {
-                        if (board.getBoardTable()[(e.getX() - 70) / 65][(e.getY() - 70) / 65].getPiece() != null) {
-                            if (click.x == 0 && click.y == 0) {
-                                click = e.getPoint();
-                                board.resetFlags();
-                                board.getBoardTable()[(click.x - 70) / 65][(click.y - 70) / 65].setSelected(true);
-                                if (board.existPossibleAttacks((click.x - 70) / 65, (click.y - 70) / 65))
-                                    board.findPossibleAttacks((click.x - 70) / 65, (click.y - 70) / 65);
-                                else
-                                    board.findPossibleMoves((click.x - 70) / 65, (click.y - 70) / 65);
-                            }
-                        } else if (click.x != 0 && click.y != 0) {
-                            if (board.getBoardTable()[(e.getX() - 70) / 65][(e.getY() - 70) / 65].isPossibleMove())
-                                board.move((click.x - 70) / 65, (click.y - 70) / 65,
-                                        (e.getX() - 70) / 65, (e.getY() - 70) / 65);
-                            else if (board.getBoardTable()[(e.getX() - 70) / 65][(e.getY() - 70) / 65].isPossibleAttack()) {
-                                System.out.println("dsada");
-                                board.attack((click.x - 70) / 65, (click.y - 70) / 65,
-                                        (e.getX() - 70) / 65, (e.getY() - 70) / 65);
-                                if (board.existPossibleAttacks((e.getX() - 70) / 65, (e.getY() - 70) / 65)) {
-                                    board.getBoardTable()[(e.getX() - 70) / 65][(e.getY() - 70) / 65].setSelected(true);
-                                    board.findPossibleAttacks((e.getX() - 70) / 65, (e.getY() - 70) / 65);
-                                }
-                            }
+                if (e.getX() > 70 && e.getY() > 70 && e.getX() < 590 && e.getY() < 590) {
+                    int mouseXIndex = fromXCoordinateToXIndex(e.getX());
+                    int mouseYIndex = fromYCoordinateToYIndex(e.getY());
+                    //intra cand se alege piesa care se doreste mutata
+                    if (board.getBoardTable()[mouseXIndex][mouseYIndex].isPossibleMove())
+                        if (board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece() != null) {
+                            clickXIndex = mouseXIndex;
+                            clickYIndex = mouseYIndex;
                             board.resetFlags();
-                            click = e.getPoint();
-                            if (!board.existPossibleAttacks((click.x - 70) / 65, (click.y - 70) / 65)) {
-                                click.x = 0;
-                                click.y = 0;
-                                blackTurn = !blackTurn;
-                                boolean attackFound = false;
-                                boolean moveFound = false;
-                                for (int index1 = 0; index1 < 8; ++index1)
-                                    for (int index2 = 0; index2 < 8; ++index2)
-                                        if (board.getBoardTable()[index1][index2].getPiece() != null &&
-                                                board.getBoardTable()[index1][index2].getPiece().isBlack() == blackTurn)
-                                            if (board.existPossibleAttacks(index1, index2)) {
-                                                board.getBoardTable()[index1][index2].setPossibleMove(true);
-                                                attackFound = true;
-                                            }
-                                if (!attackFound)
-                                    for (int index1 = 0; index1 < 8; ++index1)
-                                        for (int index2 = 0; index2 < 8; ++index2)
-                                            if (board.getBoardTable()[index1][index2].getPiece() != null &&
-                                                    board.getBoardTable()[index1][index2].getPiece().isBlack() == blackTurn)
-                                                if (board.existPossibleMoves(index1, index2)) {
-                                                    board.getBoardTable()[index1][index2].setPossibleMove(true);
-                                                    moveFound = true;
-                                                }
-                                if (!moveFound && !attackFound)
-                                    if (blackTurn)
-                                        System.out.println("Black lost!");
-                                    else
-                                        System.out.println("Red lost!");
-                            }
+                            board.getBoardTable()[clickXIndex][clickYIndex].setSelected(true);
+                            if (board.existPossibleAttacks(clickXIndex, clickYIndex))
+                                board.findPossibleAttacks(clickXIndex, clickYIndex);
+                            else
+                                board.findPossibleMoves(clickXIndex, clickYIndex);
+                        } else {
+                            //intra cand se doreste mutarea piesei gasite anterior
+                            board.move(clickXIndex, clickYIndex, mouseXIndex, mouseYIndex);
+                            if ((mouseYIndex == 0 || mouseYIndex == 7) &&
+                                    !board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece().isKinged())
+                                makeKing(mouseXIndex, mouseYIndex);
+                            board.resetFlags();
+                            blackTurn = !blackTurn;
+                            possibilities();
                         }
-                        repaint();
+                    else if (board.getBoardTable()[mouseXIndex][mouseYIndex].isPossibleAttack()) {
+                        //intra cand se doreste atacul piesei gasite anterior
+                        board.attack(clickXIndex, clickYIndex, mouseXIndex, mouseYIndex);
+                        if ((mouseYIndex == 0 || mouseYIndex == 7) &&
+                                !board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece().isKinged())
+                            makeKing(mouseXIndex, mouseYIndex);
+                        board.resetFlags();
+                        if (board.existPossibleAttacks(mouseXIndex, mouseYIndex)) {
+                            //intra daca se mai poate ataca in aceasi tura cu aceasta piesa
+                            clickXIndex = mouseXIndex;
+                            clickYIndex = mouseYIndex;
+                            board.getBoardTable()[mouseXIndex][mouseYIndex].setSelected(true);
+                            board.findPossibleAttacks(mouseXIndex, mouseYIndex);
+                        } else {
+                            blackTurn = !blackTurn;
+                            possibilities();
+                        }
+                    } else {
+                        board.resetFlags();
+                        possibilities();
                     }
+                    repaint();
+                }
             }
         });
+    }
+
+    private void makeKing(int mouseXIndex, int mouseYIndex) {
+        if (board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece().isBlack()) {
+            if (mouseYIndex == 7)
+                board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece().setKinged(true);
+        } else if (mouseYIndex == 0)
+            board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece().setKinged(true);
+    }
+
+    private void restart() {
+        board=new MyBoard();
+        blackTurn = true;
+        gameEnded = false;
+        repaint();
+    }
+
+    private void reset() {
+        resetScore();
+        restart();
+    }
+
+    private void resetScore() {
+    }
+
+    private void possibilities() {
+        boolean attackFound;
+        boolean moveFound = false;
+        attackFound = searchPossibleAttackingPieces();
+        if (!attackFound)
+            moveFound = searchPossibleMovingPieces();
+        gameEnded = isGameEnded(attackFound, moveFound);
+    }
+
+    private boolean isGameEnded(boolean attackFound, boolean moveFound) {
+        if (!moveFound && !attackFound) {
+            if (blackTurn)
+                System.out.println("Red won!");
+            else
+                System.out.println("Black won!");
+            return true;
+        }
+        if (board.getRedPieces() == 0) {
+            System.out.println("Black won!");
+            return true;
+        }
+        if (board.getBlackPieces() == 0) {
+            System.out.println("Red won!");
+            return true;
+        }
+        return false;
+    }
+
+    private int fromXCoordinateToXIndex(int xCoordinate) {
+        return (xCoordinate - 70) / 65;
+    }
+
+    private int fromYCoordinateToYIndex(int yCoordinate) {
+        return (yCoordinate - 70) / 65;
+    }
+
+    private boolean searchPossibleAttackingPieces() {
+        boolean attackFound;
+        attackFound = false;
+        for (int index1 = 0; index1 < 8; ++index1)
+            for (int index2 = 0; index2 < 8; ++index2)
+                if (board.getBoardTable()[index1][index2].getPiece() != null &&
+                        board.getBoardTable()[index1][index2].getPiece().isBlack() == blackTurn)
+                    if (board.existPossibleAttacks(index1, index2)) {
+                        board.getBoardTable()[index1][index2].setPossibleMove(true);
+                        attackFound = true;
+                    }
+        return attackFound;
+    }
+
+    private boolean searchPossibleMovingPieces() {
+        boolean moveFound = false;
+        for (int index1 = 0; index1 < 8; ++index1)
+            for (int index2 = 0; index2 < 8; ++index2)
+                if (board.getBoardTable()[index1][index2].getPiece() != null &&
+                        board.getBoardTable()[index1][index2].getPiece().isBlack() == blackTurn)
+                    if (board.existPossibleMoves(index1, index2)) {
+                        board.getBoardTable()[index1][index2].setPossibleMove(true);
+                        moveFound = true;
+                    }
+        return moveFound;
     }
 
     protected void paintComponent(Graphics g) {
@@ -151,7 +225,7 @@ public class OnePlayerPanel extends JPanel {
 
                 if (board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].isSelected())
                     g.drawImage(Choose.selected, xIndex, yIndex, null);
-                else if (board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].isPossibleMove()||
+                else if (board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].isPossibleMove() ||
                         board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].isPossibleAttack())
                     g.drawImage(Choose.possible, xIndex, yIndex, null);
 

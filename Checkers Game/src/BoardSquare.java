@@ -19,7 +19,6 @@ public class BoardSquare {
 
     public boolean isPossibleMove() {
         return possibleMove;
-
     }
 
     public boolean isPossibleAttack() {
@@ -39,7 +38,7 @@ public class BoardSquare {
     }
 
     public void setPossibleAttack(boolean possibleAttack) {
-        this.possibleMove = possibleAttack;
+        this.possibleAttack = possibleAttack;
     }
 
     public void setSelected(boolean selected) {
