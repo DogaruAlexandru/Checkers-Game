@@ -83,56 +83,55 @@ public class OnePlayerPanel extends JPanel {
                                     board.findPossibleMoves((click.x - 70) / 65, (click.y - 70) / 65);
                             }
                         } else if (click.x != 0 && click.y != 0) {
-//                            for (int index1 = 0; index1 < 8; ++index1) {
-//                                for (int index2 = 0; index2 < 8; ++index2)
-//                                    if (board.getBoardTable()[index2][index1].getPiece() != null)
-//                                        System.out.print("1 ");
-//                                    else
-//                                        System.out.print("0 ");
-//                                System.out.println();
-//                            }
-//                            System.out.println();
-                            if (board.getBoardTable()[(click.x - 70) / 65][(click.y - 70) / 65].isPossibleMove())
-                                board.move((click.x - 70) / 65, (click.y - 70) / 65,//todo aflat de ce numuta pisesa
+                            if (board.getBoardTable()[(e.getX() - 70) / 65][(e.getY() - 70) / 65].isPossibleMove())
+                                board.move((click.x - 70) / 65, (click.y - 70) / 65,
                                         (e.getX() - 70) / 65, (e.getY() - 70) / 65);
-                            else if (board.getBoardTable()[(click.x - 70) / 65][(click.y - 70) / 65].isPossibleAttack())
+                            else if (board.getBoardTable()[(e.getX() - 70) / 65][(e.getY() - 70) / 65].isPossibleAttack()) {
+                                System.out.println("dsada");
                                 board.attack((click.x - 70) / 65, (click.y - 70) / 65,
                                         (e.getX() - 70) / 65, (e.getY() - 70) / 65);
+                                if (board.existPossibleAttacks((e.getX() - 70) / 65, (e.getY() - 70) / 65)) {
+                                    board.getBoardTable()[(e.getX() - 70) / 65][(e.getY() - 70) / 65].setSelected(true);
+                                    board.findPossibleAttacks((e.getX() - 70) / 65, (e.getY() - 70) / 65);
+                                }
+                            }
                             board.resetFlags();
                             click = e.getPoint();
-                            if (board.getBoardTable()[(click.x - 70) / 65][(click.y - 70) / 65].getPiece() != null)
-                                if (board.existPossibleAttacks((click.x - 70) / 65, (click.y - 70) / 65)) {
-                                    board.getBoardTable()[(click.x - 70) / 65][(click.y - 70) / 65].setSelected(true);
-                                    board.findPossibleAttacks((click.x - 70) / 65, (click.y - 70) / 65);
-                                } else {
-//todo gasit daca vreo piesa de culoare opusa are atack obligatoriu si
-// valorificat cu posible move, daca nu sa se gaseasca toate mutarile  posibile
-                                    click.x = 0;
-                                    click.y = 0;
-                                    blackTurn = !blackTurn;
-                                    boolean attackFound = false;
+                            if (!board.existPossibleAttacks((click.x - 70) / 65, (click.y - 70) / 65)) {
+                                click.x = 0;
+                                click.y = 0;
+                                blackTurn = !blackTurn;
+                                boolean attackFound = false;
+                                boolean moveFound = false;
+                                for (int index1 = 0; index1 < 8; ++index1)
+                                    for (int index2 = 0; index2 < 8; ++index2)
+                                        if (board.getBoardTable()[index1][index2].getPiece() != null &&
+                                                board.getBoardTable()[index1][index2].getPiece().isBlack() == blackTurn)
+                                            if (board.existPossibleAttacks(index1, index2)) {
+                                                board.getBoardTable()[index1][index2].setPossibleMove(true);
+                                                attackFound = true;
+                                            }
+                                if (!attackFound)
                                     for (int index1 = 0; index1 < 8; ++index1)
                                         for (int index2 = 0; index2 < 8; ++index2)
                                             if (board.getBoardTable()[index1][index2].getPiece() != null &&
                                                     board.getBoardTable()[index1][index2].getPiece().isBlack() == blackTurn)
-                                                if (board.existPossibleAttacks(index1, index2)) {
-                                                    board.findPossibleAttacks(index1, index2);
-                                                    attackFound = true;
-                                                }
-                                    if (!attackFound)
-                                        for (int index1 = 0; index1 < 8; ++index1)
-                                            for (int index2 = 0; index2 < 8; ++index2)
-                                                if (board.getBoardTable()[index1][index2].getPiece() != null &&
-                                                        board.getBoardTable()[index1][index2].getPiece().isBlack() == blackTurn)
+                                                if (board.existPossibleMoves(index1, index2)) {
                                                     board.getBoardTable()[index1][index2].setPossibleMove(true);
-                                }
+                                                    moveFound = true;
+                                                }
+                                if (!moveFound && !attackFound)
+                                    if (blackTurn)
+                                        System.out.println("Black lost!");
+                                    else
+                                        System.out.println("Red lost!");
+                            }
                         }
                         repaint();
                     }
             }
         });
     }
-
 
     protected void paintComponent(Graphics g) {
         //super.paintComponent(g);
@@ -152,7 +151,8 @@ public class OnePlayerPanel extends JPanel {
 
                 if (board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].isSelected())
                     g.drawImage(Choose.selected, xIndex, yIndex, null);
-                else if (board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].isPossibleMove())
+                else if (board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].isPossibleMove()||
+                        board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].isPossibleAttack())
                     g.drawImage(Choose.possible, xIndex, yIndex, null);
 
                 if (board.getBoardTable()[(xIndex - 70) / 65][(yIndex - 70) / 65].getPiece() != null) {

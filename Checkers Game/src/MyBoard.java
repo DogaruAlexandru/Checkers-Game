@@ -113,25 +113,22 @@ public class MyBoard {
                     boardTable[xIndex - 1][yIndex + 1].getPiece() != null &&
                     boardTable[xIndex - 1][yIndex + 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack())
                 return true;
-            if (xIndex < 6 && boardTable[xIndex + 2][yIndex + 2].getPiece() == null &&
+            return xIndex < 6 && boardTable[xIndex + 2][yIndex + 2].getPiece() == null &&
                     boardTable[xIndex + 1][yIndex + 1].getPiece() != null &&
-                    boardTable[xIndex + 1][yIndex + 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack())
-                return true;
+                    boardTable[xIndex + 1][yIndex + 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack();
         }
         return false;
     }
 
     private boolean existPossibleAttacksUp(int xIndex, int yIndex) {
         if (yIndex > 1) {
-            boolean found = false;
             if (xIndex > 1 && boardTable[xIndex - 2][yIndex - 2].getPiece() == null &&
                     boardTable[xIndex - 1][yIndex - 1].getPiece() != null &&
                     boardTable[xIndex - 1][yIndex - 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack())
                 return true;
-            if (xIndex < 6 && boardTable[xIndex + 1][yIndex - 1].getPiece() == null &&
+            return xIndex < 6 && boardTable[xIndex + 1][yIndex - 1].getPiece() == null &&
                     boardTable[xIndex + 1][yIndex - 1].getPiece() != null &&
-                    boardTable[xIndex + 1][yIndex - 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack())
-                return true;
+                    boardTable[xIndex + 1][yIndex - 1].getPiece().isBlack() != boardTable[xIndex][yIndex].getPiece().isBlack();
         }
         return false;
     }
@@ -146,6 +143,34 @@ public class MyBoard {
             return existPossibleAttacksUp(xIndex, yIndex);
     }
 
+    private boolean existPossibleMovesDown(int xIndex, int yIndex) {
+        if (yIndex < 7) {
+            if (xIndex > 0 && boardTable[xIndex - 1][yIndex + 1].getPiece() == null)
+                return true;
+            return xIndex < 7 && boardTable[xIndex + 1][yIndex + 1].getPiece() == null;
+        }
+        return false;
+    }
+
+    private boolean existPossibleMovesUp(int xIndex, int yIndex) {
+        if (yIndex > 0) {
+            if (xIndex > 0 && boardTable[xIndex - 1][yIndex - 1].getPiece() == null)
+                return true;
+            return xIndex < 7 && boardTable[xIndex + 1][yIndex - 1].getPiece() == null;
+        }
+        return false;
+    }
+
+    public boolean existPossibleMoves(int xIndex, int yIndex) {
+        if (boardTable[xIndex][yIndex].getPiece().isKinged())
+            return (existPossibleMovesDown(xIndex, yIndex) || existPossibleMovesUp(xIndex, yIndex));
+
+        else if (boardTable[xIndex][yIndex].getPiece().isBlack())
+            return existPossibleMovesDown(xIndex, yIndex);
+        else
+            return existPossibleMovesUp(xIndex, yIndex);
+    }
+
     public void resetFlags() {
         for (int index1 = 0; index1 < 8; ++index1)
             for (int index2 = 0; index2 < 8; ++index2) {
@@ -158,8 +183,6 @@ public class MyBoard {
     public void move(int xIndexOld, int yIndexOld, int xIndexNew, int yIndexNew) {
         boardTable[xIndexNew][yIndexNew].setPiece(boardTable[xIndexOld][yIndexOld].getPiece());
         boardTable[xIndexOld][yIndexOld].setPiece(null);
-//        boardTable[yIndexNew][xIndexNew].setPiece(boardTable[yIndexOld][xIndexOld].getPiece());
-//        boardTable[yIndexOld][xIndexOld].setPiece(null);
     }
 
     public void attack(int xIndexOld, int yIndexOld, int xIndexNew, int yIndexNew) {
