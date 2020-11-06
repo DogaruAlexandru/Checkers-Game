@@ -1,7 +1,10 @@
-import java.awt.*;
+import java.awt.Font;
+import java.awt.Color;
+import java.awt.Graphics;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JButton;
+import javax.swing.JPanel;
+import javax.swing.BorderFactory;
 
 public class MyMenu extends JPanel {
     private final JLabel title;
@@ -10,14 +13,15 @@ public class MyMenu extends JPanel {
 
     public MyMenu() {
         setLayout(null);
+        setBorder(BorderFactory.createLineBorder(Color.black));
 
         title = new JLabel("Checkers");
         onePlayer = new JButton("1 Player");
         twoPlayers = new JButton("2 Players");
 
-        title.setBounds(71, 50, 250, 50);
-        onePlayer.setBounds(105, 180, 175, 30);
-        twoPlayers.setBounds(105, 215, 175, 30);
+        title.setBounds(75, 52, 250, 50);
+        onePlayer.setBounds(105, 200, 175, 30);
+        twoPlayers.setBounds(105, 235, 175, 30);
 
         title.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 60));
         onePlayer.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
@@ -34,7 +38,20 @@ public class MyMenu extends JPanel {
     }
 
     protected void paintComponent(Graphics g) {
-        //super.paintComponent(g);
         g.drawImage(Choose.background, 0, 0, null);
+        drawTitleFrame(g);
+    }
+
+    private void drawTitleFrame(Graphics g) {
+        g.setColor(Choose.myBrown);
+        g.fillRect(60, 40, 265, 70);
+        g.setColor(Color.BLACK);
+        g.drawRect(60, 40, 265, 70);
+        g.setColor(Color.BLACK);
+
+        g.setColor(Choose.myWhite);
+        g.fillRect(65, 45, 255, 60);
+        g.setColor(Color.BLACK);
+        g.drawRect(65, 45, 255, 60);
     }
 }
