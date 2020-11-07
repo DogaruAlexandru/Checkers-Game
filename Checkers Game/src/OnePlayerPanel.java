@@ -44,12 +44,8 @@ public class OnePlayerPanel extends JPanel {
         restart.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
         reset.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
         back.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
-        youLabel.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
-        computerLabel.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
 
         score.setForeground(Color.BLACK);
-        youLabel.setForeground(Color.BLUE);
-        computerLabel.setForeground(Color.BLACK);
 
         add(score);
         add(restart);
@@ -71,7 +67,7 @@ public class OnePlayerPanel extends JPanel {
         });
 
         addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 if (e.getX() > 70 && e.getY() > 70 && e.getX() < 590 && e.getY() < 590) {
                     int mouseXIndex = board.fromXCoordinateToXIndex(e.getX());
                     int mouseYIndex = board.fromYCoordinateToYIndex(e.getY());
@@ -88,8 +84,8 @@ public class OnePlayerPanel extends JPanel {
                         board.possibilities();
                     }
                     if (board.isGameEnded()) {
+                        changeScore();
                         restart();
-                        gameEnded();
                         score.setText(blackScore + ":" + redScore);
                     }
                     repaint();
@@ -102,6 +98,8 @@ public class OnePlayerPanel extends JPanel {
         remove(youLabel);
         remove(computerLabel);
         board = new MyBoard(youLabel,computerLabel);
+        youLabel.setBounds(755, 150, 180, 50);
+        computerLabel.setBounds(768, 242, 180, 50);
         add(youLabel);
         add(computerLabel);
     }
@@ -112,8 +110,8 @@ public class OnePlayerPanel extends JPanel {
         score.setText(blackScore + ":" + redScore);
     }
 
-    private void gameEnded() {
-        if (board.isBlackTurn())
+    private void changeScore() {
+        if (!board.isBlackTurn())
             ++blackScore;
         else
             ++redScore;

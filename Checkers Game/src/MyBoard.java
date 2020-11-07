@@ -22,27 +22,32 @@ public class MyBoard {
 
         this.firstLabel = firstLabel;
         this.secondLabel = secondLabel;
-        firstLabel.setBounds(742, 150, 180, 50);
-        secondLabel.setBounds(757, 242, 180, 50);
         firstLabel .setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
         secondLabel .setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
         firstLabel.setForeground(Color.BLUE);
         secondLabel.setForeground(Color.BLACK);
 
         boardTable = new BoardSquare[8][8];
-        for (int index1 = 0; index1 < 8; ++index1)
-            for (int index2 = 0; index2 < 8; ++index2)
-                if ((index1 + index2) % 2 == 0)
-                    boardTable[index1][index2] = new BoardSquare(false);
-                else
-                    boardTable[index1][index2] = new BoardSquare(true);
+        createTiles();
+        createPieces();
+    }
 
+    private void createPieces() {
         for (int posY = 0; posY < 3; ++posY)
             for (int posX = 0; posX < 8; ++posX)
                 if ((posY + posX) % 2 == 0)
                     boardTable[posX][posY + 5].setPiece(new Piece(false));
                 else
                     boardTable[posX][posY].setPiece(new Piece(true));
+    }
+
+    private void createTiles() {
+        for (int index1 = 0; index1 < 8; ++index1)
+            for (int index2 = 0; index2 < 8; ++index2)
+                if ((index1 + index2) % 2 == 0)
+                    boardTable[index1][index2] = new BoardSquare(false);
+                else
+                    boardTable[index1][index2] = new BoardSquare(true);
     }
 
     public BoardSquare[][] getBoardTable() {
@@ -55,14 +60,6 @@ public class MyBoard {
 
     public boolean isGameEnded() {
         return gameEnded;
-    }
-
-    public JLabel getFirstLabel() {
-        return firstLabel;
-    }
-
-    public JLabel getSecondLabel() {
-        return secondLabel;
     }
 
     private void findPossibleMovesDown(int xIndex, int yIndex) {

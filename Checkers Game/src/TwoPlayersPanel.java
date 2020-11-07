@@ -44,12 +44,8 @@ public class TwoPlayersPanel extends JPanel {
         restart.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
         reset.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
         back.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
-        blackLabel.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
-        redLabel.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
 
         score.setForeground(Color.BLACK);
-        blackLabel.setForeground(Color.BLUE);
-        redLabel.setForeground(Color.BLACK);
 
         add(score);
         add(restart);
@@ -71,7 +67,7 @@ public class TwoPlayersPanel extends JPanel {
         });
 
         addMouseListener(new MouseAdapter() {
-            public void mouseClicked(MouseEvent e) {
+            public void mousePressed(MouseEvent e) {
                 if (e.getX() > 70 && e.getY() > 70 && e.getX() < 590 && e.getY() < 590) {
                     int mouseXIndex = board.fromXCoordinateToXIndex(e.getX());
                     int mouseYIndex = board.fromYCoordinateToYIndex(e.getY());
@@ -88,8 +84,8 @@ public class TwoPlayersPanel extends JPanel {
                         board.possibilities();
                     }
                     if (board.isGameEnded()) {
+                        changeScore();
                         restart();
-                        gameEnded();
                         score.setText(blackScore + ":" + redScore);
                     }
                     repaint();
@@ -102,6 +98,8 @@ public class TwoPlayersPanel extends JPanel {
         remove(blackLabel);
         remove(redLabel);
         board = new MyBoard(blackLabel, redLabel);
+        blackLabel.setBounds(742, 150, 180, 50);
+        redLabel.setBounds(757, 242, 180, 50);
         add(blackLabel);
         add(redLabel);
     }
@@ -112,8 +110,8 @@ public class TwoPlayersPanel extends JPanel {
         score.setText(blackScore + ":" + redScore);
     }
 
-    private void gameEnded() {
-        if (board.isBlackTurn())
+    private void changeScore() {
+        if (!board.isBlackTurn())
             ++blackScore;
         else
             ++redScore;
