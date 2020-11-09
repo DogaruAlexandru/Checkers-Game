@@ -1,8 +1,7 @@
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Vector;
 import javax.swing.JLabel;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -74,7 +73,7 @@ public class OnePlayerPanel extends JPanel {
 
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                if (!board.isGameEnded()) {
+                if (!board.isGameEnded())
                     if (e.getX() > 70 && e.getY() > 70 && e.getX() < 590 && e.getY() < 590) {
                         int mouseXIndex = board.fromXCoordinateToXIndex(e.getX());
                         int mouseYIndex = board.fromYCoordinateToYIndex(e.getY());
@@ -95,25 +94,57 @@ public class OnePlayerPanel extends JPanel {
                             score.setText(blackScore + ":" + redScore);
                         }
                         repaint();
+                        if (!board.isBlackTurn())
+                            AIPLay();
+                        if (board.isGameEnded()) {
+                            changeScore();
+                            score.setText(blackScore + ":" + redScore);
+                        }
                     }
-                }
             }
         });
     }
 
-//    private void AI() {
-//        for (int index1 = 0; index1 < 8; ++index1)
-//            for (int index2 = 0; index2 < 8; ++index2) {
-//                if (board.getBoardTable()[index1][index2].isPossibleAttack()) {
-//
-//                    return;
-//                }
-//                if (board.getBoardTable()[index1][index2].isPossibleMove()) {
-//
-//                    return;
-//                }
-//            }
-//    }
+    private void AIPLay() {
+        while (!board.isBlackTurn()) {
+            Point currentPosition = AIChoice();
+            if (board.getBoardTable()[currentPosition.x][currentPosition.y].isPossibleMove()) {
+                if (board.getBoardTable()[currentPosition.x][currentPosition.y].getPiece() != null) {
+                    board.selectPieceToUse(currentPosition.x, currentPosition.y);
+                } else {
+                    board.executeMove(currentPosition.x, currentPosition.y);
+                }
+            } else if (board.getBoardTable()[currentPosition.x][currentPosition.y].isPossibleAttack()) {
+                board.executeAttack(currentPosition.x, currentPosition.y);
+            } else {
+                board.resetFlags();
+                board.possibilities();
+            }
+            if (board.isGameEnded()) {
+                changeScore();
+                score.setText(blackScore + ":" + redScore);
+            }
+            repaint();
+            try {
+                Thread.sleep(300);
+            } catch (InterruptedException interruptedException) {
+                interruptedException.printStackTrace();
+            }
+        }
+    }
+
+    private Point AIChoice() {
+        Vector<Point> options = new Vector<>();
+        for (int index1 = 0; index1 < 8; ++index1)
+            for (int index2 = 0; index2 < 8; ++index2) {
+                if (board.getBoardTable()[index1][index2].isPossibleAttack())
+                    options.add(new Point(index1, index2));
+                if (board.getBoardTable()[index1][index2].isPossibleMove())
+                    options.add(new Point(index1, index2));
+            }
+        int index = (int) (Math.random() * options.size());
+        return options.elementAt(index);
+    }
 
     private void restart() {
         remove(youLabel);
