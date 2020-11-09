@@ -118,7 +118,7 @@ public class MyBoard {
         }
     }
 
-    public void findPossibleAttacks(int xIndex, int yIndex) {
+    private void findPossibleAttacks(int xIndex, int yIndex) {
         if (boardTable[xIndex][yIndex].getPiece().isKinged()) {
             findPossibleAttacksDown(xIndex, yIndex);
             findPossibleAttacksUp(xIndex, yIndex);
@@ -156,7 +156,7 @@ public class MyBoard {
         return false;
     }
 
-    public boolean existPossibleAttacks(int xIndex, int yIndex) {
+    private boolean existPossibleAttacks(int xIndex, int yIndex) {
         if (boardTable[xIndex][yIndex].getPiece().isKinged())
             return (existPossibleAttacksDown(xIndex, yIndex) || existPossibleAttacksUp(xIndex, yIndex));
         if (boardTable[xIndex][yIndex].getPiece().isBlack())
@@ -182,7 +182,7 @@ public class MyBoard {
         return false;
     }
 
-    public boolean existPossibleMoves(int xIndex, int yIndex) {
+    private boolean existPossibleMoves(int xIndex, int yIndex) {
         if (boardTable[xIndex][yIndex].getPiece().isKinged())
             return (existPossibleMovesDown(xIndex, yIndex) || existPossibleMovesUp(xIndex, yIndex));
         if (boardTable[xIndex][yIndex].getPiece().isBlack())
@@ -199,7 +199,7 @@ public class MyBoard {
             }
     }
 
-    public void move(int xIndexOld, int yIndexOld, int xIndexNew, int yIndexNew) {
+    private void move(int xIndexOld, int yIndexOld, int xIndexNew, int yIndexNew) {
         boardTable[xIndexNew][yIndexNew].setPiece(boardTable[xIndexOld][yIndexOld].getPiece());
         boardTable[xIndexOld][yIndexOld].setPiece(null);
     }
@@ -212,7 +212,7 @@ public class MyBoard {
         return (yIndexOld - yIndexNew) / 2 + yIndexNew;
     }
 
-    public void attack(int xIndexOld, int yIndexOld, int xIndexNew, int yIndexNew) {
+    private void attack(int xIndexOld, int yIndexOld, int xIndexNew, int yIndexNew) {
         boardTable[xIndexNew][yIndexNew].setPiece(boardTable[xIndexOld][yIndexOld].getPiece());
         boardTable[xIndexOld][yIndexOld].setPiece(null);
         int attackedPieceXIndex = getAttackedPieceXIndex(xIndexOld, xIndexNew);
@@ -281,7 +281,7 @@ public class MyBoard {
             findPossibleMoves(clickXIndex, clickYIndex);
     }
 
-    public void changeTurn(JLabel firstLabel, JLabel secondLabel) {
+    private void changeTurn(JLabel firstLabel, JLabel secondLabel) {
         blackTurn = !blackTurn;
         if (blackTurn) {
             firstLabel.setForeground(Color.BLUE);
@@ -292,7 +292,7 @@ public class MyBoard {
         }
     }
 
-    public boolean searchPossibleAttackingPieces() {
+    private boolean searchPossibleAttackingPieces() {
         boolean attackFound;
         attackFound = false;
         for (int index1 = 0; index1 < 8; ++index1)
@@ -306,7 +306,7 @@ public class MyBoard {
         return attackFound;
     }
 
-    public boolean searchPossibleMovingPieces() {
+    private boolean searchPossibleMovingPieces() {
         boolean moveFound = false;
         for (int index1 = 0; index1 < 8; ++index1)
             for (int index2 = 0; index2 < 8; ++index2)
@@ -319,7 +319,7 @@ public class MyBoard {
         return moveFound;
     }
 
-    public void makeKing(int mouseXIndex, int mouseYIndex) {
+    private void makeKing(int mouseXIndex, int mouseYIndex) {
         if (boardTable[mouseXIndex][mouseYIndex].getPiece().isBlack()) {
             if (mouseYIndex == 7)
                 boardTable[mouseXIndex][mouseYIndex].getPiece().setKinged(true);
