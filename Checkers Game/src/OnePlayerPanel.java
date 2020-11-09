@@ -1,11 +1,14 @@
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Vector;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import javax.swing.JPanel;
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class OnePlayerPanel extends JPanel {
     private MyBoard board;
@@ -124,9 +127,9 @@ public class OnePlayerPanel extends JPanel {
                 changeScore();
                 score.setText(blackScore + ":" + redScore);
             }
-            repaint();
+            paintImmediately(70,70,520,520);
             try {
-                Thread.sleep(300);
+                Thread.sleep(500);
             } catch (InterruptedException interruptedException) {
                 interruptedException.printStackTrace();
             }
