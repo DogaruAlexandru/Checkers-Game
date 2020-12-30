@@ -8,27 +8,17 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 
-public class OnePlayerPanel extends JPanel {
-    private MyBoard board;
-    private final JLabel score;
-    private final JButton restart;
-    private final JButton reset;
-    private final JButton back;
-    private final JLabel endLabel;
-    private int redScore;
-    private int blackScore;
-    private final JLabel youLabel;
-    private final JLabel computerLabel;
+public class OnePlayerPanel extends TwoPlayersPanel {
 
     public OnePlayerPanel() {
+        super(false);
         setLayout(null);
         setBorder(BorderFactory.createLineBorder(Color.black));
 
-        youLabel = new JLabel("You");
-        computerLabel = new JLabel("PC");
-        board = new MyBoard(youLabel, computerLabel);
+        blackLabel = new JLabel("You");
+        redLabel = new JLabel("PC");
+        board = new MyBoard(blackLabel, redLabel);
         score = new JLabel(blackScore + ":" + redScore);
         restart = new JButton("Restart game");
         endLabel = new JLabel();
@@ -41,8 +31,8 @@ public class OnePlayerPanel extends JPanel {
         restart.setBounds(715, 435, 155, 30);
         reset.setBounds(715, 470, 155, 30);
         back.setBounds(715, 505, 155, 30);
-        youLabel.setBounds(755, 150, 180, 50);
-        computerLabel.setBounds(768, 242, 180, 50);
+        blackLabel.setBounds(755, 150, 180, 50);
+        redLabel.setBounds(768, 242, 180, 50);
 
         score.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
         restart.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
@@ -57,8 +47,8 @@ public class OnePlayerPanel extends JPanel {
         add(restart);
         add(reset);
         add(back);
-        add(youLabel);
-        add(computerLabel);
+        add(blackLabel);
+        add(redLabel);
         add(endLabel);
 
         endLabel.setVisible(false);
@@ -149,30 +139,6 @@ public class OnePlayerPanel extends JPanel {
         return options.elementAt(index);
     }
 
-    private void restart() {
-        remove(youLabel);
-        remove(computerLabel);
-        board = new MyBoard(youLabel, computerLabel);
-        board.possibilities();
-        youLabel.setBounds(755, 150, 180, 50);
-        computerLabel.setBounds(768, 242, 180, 50);
-        add(youLabel);
-        add(computerLabel);
-        endLabel.setVisible(false);
-    }
-
-    private void resetScore() {
-        redScore = 0;
-        blackScore = 0;
-        score.setText(blackScore + ":" + redScore);
-    }
-
-    private void changeScore() {
-        if (!board.isBlackTurn())
-            ++blackScore;
-        else
-            ++redScore;
-    }
 
     private void drawEndScreen(Graphics g) {
         g.setColor(Color.BLACK);

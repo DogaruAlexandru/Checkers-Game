@@ -9,16 +9,18 @@ import javax.swing.JPanel;
 import javax.swing.BorderFactory;
 
 public class TwoPlayersPanel extends JPanel {
-    private MyBoard board;
-    private final JLabel score;
-    private final JLabel blackLabel;
-    private final JLabel redLabel;
-    private final JLabel endLabel;
-    private final JButton restart;
-    private final JButton reset;
-    private final JButton back;
-    private int redScore;
-    private int blackScore;
+    protected MyBoard board;
+    protected  JLabel score;
+    protected  JLabel blackLabel;
+    protected  JLabel redLabel;
+    protected JLabel endLabel;
+
+    protected  JButton restart;
+    protected  JButton reset;
+    protected  JButton back;
+
+    protected int redScore;
+    protected int blackScore;
 
     public TwoPlayersPanel() {
         setLayout(null);
@@ -102,25 +104,28 @@ public class TwoPlayersPanel extends JPanel {
         });
     }
 
-    private void restart() {
+    public TwoPlayersPanel(boolean b) {
+    }
+
+    protected void restart() {
         remove(blackLabel);
         remove(redLabel);
         board = new MyBoard(blackLabel, redLabel);
         board.possibilities();
-        blackLabel.setBounds(742, 150, 180, 50);
-        redLabel.setBounds(757, 242, 180, 50);
+        blackLabel.setBounds(755, 150, 180, 50);
+        redLabel.setBounds(768, 242, 180, 50);
         add(blackLabel);
         add(redLabel);
         endLabel.setVisible(false);
     }
 
-    private void resetScore() {
+    protected void resetScore() {
         redScore = 0;
         blackScore = 0;
         score.setText(blackScore + ":" + redScore);
     }
 
-    private void changeScore() {
+    protected void changeScore() {
         if (!board.isBlackTurn())
             ++blackScore;
         else
