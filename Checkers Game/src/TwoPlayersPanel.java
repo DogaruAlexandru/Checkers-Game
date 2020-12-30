@@ -112,8 +112,8 @@ public class TwoPlayersPanel extends JPanel {
         remove(redLabel);
         board = new MyBoard(blackLabel, redLabel);
         board.possibilities();
-        blackLabel.setBounds(755, 150, 180, 50);
-        redLabel.setBounds(768, 242, 180, 50);
+        blackLabel.setBounds(742, 150, 180, 50);
+        redLabel.setBounds(757, 242, 180, 50);
         add(blackLabel);
         add(redLabel);
         endLabel.setVisible(false);
@@ -132,7 +132,7 @@ public class TwoPlayersPanel extends JPanel {
             ++redScore;
     }
 
-    private void drawEndScreen(Graphics g) {
+    protected void drawEndScreen(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(100, 150, 460, 290);
         g.setColor(Choose.myWhite);

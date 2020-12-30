@@ -1,6 +1,5 @@
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -16,8 +15,8 @@ public class OnePlayerPanel extends TwoPlayersPanel {
         setLayout(null);
         setBorder(BorderFactory.createLineBorder(Color.black));
 
-        blackLabel = new JLabel("You");
-        redLabel = new JLabel("PC");
+        blackLabel = new JLabel("Black");
+        redLabel = new JLabel("Red");
         board = new MyBoard(blackLabel, redLabel);
         score = new JLabel(blackScore + ":" + redScore);
         restart = new JButton("Restart game");
@@ -31,8 +30,8 @@ public class OnePlayerPanel extends TwoPlayersPanel {
         restart.setBounds(715, 435, 155, 30);
         reset.setBounds(715, 470, 155, 30);
         back.setBounds(715, 505, 155, 30);
-        blackLabel.setBounds(755, 150, 180, 50);
-        redLabel.setBounds(768, 242, 180, 50);
+        blackLabel.setBounds(742, 150, 180, 50);
+        redLabel.setBounds(757, 242, 180, 50);
 
         score.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
         restart.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 20));
@@ -86,13 +85,9 @@ public class OnePlayerPanel extends TwoPlayersPanel {
                             changeScore();
                             score.setText(blackScore + ":" + redScore);
                         }
-                        repaint();
-                        if (!board.isBlackTurn())
+                        if (!board.isBlackTurn() && !board.isGameEnded())
                             AIPLay();
-                        if (board.isGameEnded()) {
-                            changeScore();
-                            score.setText(blackScore + ":" + redScore);
-                        }
+                        repaint();
                     }
             }
         });
@@ -117,7 +112,7 @@ public class OnePlayerPanel extends TwoPlayersPanel {
                 changeScore();
                 score.setText(blackScore + ":" + redScore);
             }
-            paintImmediately(70,70,520,520);
+            paintImmediately(70, 70, 520, 520);
             try {
                 Thread.sleep(500);
             } catch (InterruptedException interruptedException) {
@@ -138,30 +133,6 @@ public class OnePlayerPanel extends TwoPlayersPanel {
         int index = (int) (Math.random() * options.size());
         return options.elementAt(index);
     }
-
-
-    private void drawEndScreen(Graphics g) {
-        g.setColor(Color.BLACK);
-        g.fillRect(100, 150, 460, 290);
-        g.setColor(Choose.myWhite);
-        g.fillRect(120, 170, 420, 250);
-        g.setColor(Color.BLACK);
-        g.drawRect(120, 170, 420, 250);
-
-        endLabel.setVisible(true);
-        if (!board.isBlackTurn()) {
-            endLabel.setBounds(175, 170, 420, 250);
-            endLabel.setText("You Won!");
-        } else {
-            endLabel.setBounds(190, 170, 420, 250);
-            endLabel.setText("PC Won!");
-        }
-    }
-
-    protected void paintComponent(Graphics g) {
-        g.drawImage(Choose.background, 0, 0, null);
-        board.draw(g);
-        if (board.isGameEnded())
-            drawEndScreen(g);
-    }
 }
+
+

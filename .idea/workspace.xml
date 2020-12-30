@@ -27,6 +27,7 @@
   <component name="ChangeListManager">
     <list default="true" id="882b7207-f728-4a8c-beaa-6ee5e9ec5a1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Checkers Game/src/Choose.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/Choose.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Checkers Game/src/OnePlayerPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/OnePlayerPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Checkers Game/src/TwoPlayersPanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/Checkers Game/src/TwoPlayersPanel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Checkers-Game/OnePlayerPanel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Checkers-Game/OnePlayerPanel.class" afterDir="false" />
@@ -46,6 +47,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$USER_HOME$/.jdks/openjdk-15.0.1/lib/src.zip!/java.base/java/lang/ArrayIndexOutOfBoundsException.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1jc7NmjwZOATLp1EybJGrEoKGzx" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -60,6 +64,9 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+  </component>
+  <component name="ReaderModeSettings">
+    <option name="enabled" value="false" />
   </component>
   <component name="RunAnythingCache">
     <option name="myCommands">

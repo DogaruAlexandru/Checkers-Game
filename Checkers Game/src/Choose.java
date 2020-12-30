@@ -63,16 +63,19 @@ public class Choose {
 
     static public void OpenMenu() {
         Frame.setSize(400, 400);
+        Frame.setLocationRelativeTo(null);
         cardLayout.show(panels, "menu");
     }
 
     static public void OpenOnePlayerPanel() {
         Frame.setSize(1000, 700);
+        Frame.setLocationRelativeTo(null);
         cardLayout.show(panels, "onePlayerPanel");
     }
 
     static public void OpenTwoPlayersPanel() {
         Frame.setSize(1000, 700);
+        Frame.setLocationRelativeTo(null);
         cardLayout.show(panels, "twoPlayersPanel");
     }
 }
