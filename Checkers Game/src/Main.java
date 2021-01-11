@@ -3,7 +3,7 @@ import javax.swing.SwingUtilities;
 public class Main {
 
     private static void InitUI() {
-        Choose game=new Choose();
+        Choose game = new Choose();
         Choose.OpenMenu();
     }
 

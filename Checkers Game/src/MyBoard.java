@@ -22,8 +22,8 @@ public class MyBoard {
 
         this.firstLabel = firstLabel;
         this.secondLabel = secondLabel;
-        firstLabel .setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
-        secondLabel .setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
+        firstLabel.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
+        secondLabel.setFont(new Font("TIMES NEW ROMAN", Font.BOLD, 40));
         firstLabel.setForeground(Color.BLUE);
         secondLabel.setForeground(Color.BLACK);
 
