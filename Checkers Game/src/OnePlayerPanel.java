@@ -22,22 +22,7 @@ public class OnePlayerPanel extends TwoPlayersPanel {
     private void AIPLay() {
         while (!board.isBlackTurn()) {
             Point currentPosition = AIChoice();
-            if (board.getBoardTable()[currentPosition.x][currentPosition.y].isPossibleMove()) {
-                if (board.getBoardTable()[currentPosition.x][currentPosition.y].getPiece() != null) {
-                    board.selectPieceToUse(currentPosition.x, currentPosition.y);
-                } else {
-                    board.executeMove(currentPosition.x, currentPosition.y);
-                }
-            } else if (board.getBoardTable()[currentPosition.x][currentPosition.y].isPossibleAttack()) {
-                board.executeAttack(currentPosition.x, currentPosition.y);
-            } else {
-                board.resetFlags();
-                board.possibilities();
-            }
-            if (board.isGameEnded()) {
-                ChangeScore();
-                score.setText(blackScore + ":" + redScore);
-            }
+            Play(currentPosition.x, currentPosition.y);
             paintImmediately(70, 70, 520, 520);
             try {
                 Thread.sleep(500);

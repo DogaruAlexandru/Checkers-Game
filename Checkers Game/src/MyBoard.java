@@ -28,11 +28,11 @@ public class MyBoard {
         secondLabel.setForeground(Color.BLACK);
 
         boardTable = new BoardSquare[8][8];
-        createTiles();
-        createPieces();
+        CreateTiles();
+        CreatePieces();
     }
 
-    private void createPieces() {
+    private void CreatePieces() {
         for (int posY = 0; posY < 3; ++posY)
             for (int posX = 0; posX < 8; ++posX)
                 if ((posY + posX) % 2 == 0)
@@ -41,7 +41,7 @@ public class MyBoard {
                     boardTable[posX][posY].setPiece(new Piece(true));
     }
 
-    private void createTiles() {
+    private void CreateTiles() {
         for (int index1 = 0; index1 < 8; ++index1)
             for (int index2 = 0; index2 < 8; ++index2)
                 if ((index1 + index2) % 2 == 0)

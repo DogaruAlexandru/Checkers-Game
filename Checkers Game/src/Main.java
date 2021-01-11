@@ -4,7 +4,7 @@ public class Main {
 
     private static void InitUI() {
         Choose game = new Choose();
-        Choose.OpenMenu();
+        game.OpenMenu();
     }
 
     public static void main(String[] args) {
