@@ -12,24 +12,7 @@ public class OnePlayerPanel extends TwoPlayersPanel {
     protected void Pressing(MouseEvent e) {
         if (!board.isGameEnded())
             if (e.getX() > 70 && e.getY() > 70 && e.getX() < 590 && e.getY() < 590) {
-                int mouseXIndex = board.fromXCoordinateToXIndex(e.getX());
-                int mouseYIndex = board.fromYCoordinateToYIndex(e.getY());
-                if (board.getBoardTable()[mouseXIndex][mouseYIndex].isPossibleMove()) {
-                    if (board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece() != null) {
-                        board.selectPieceToUse(mouseXIndex, mouseYIndex);
-                    } else {
-                        board.executeMove(mouseXIndex, mouseYIndex);
-                    }
-                } else if (board.getBoardTable()[mouseXIndex][mouseYIndex].isPossibleAttack()) {
-                    board.executeAttack(mouseXIndex, mouseYIndex);
-                } else {
-                    board.resetFlags();
-                    board.possibilities();
-                }
-                if (board.isGameEnded()) {
-                    ChangeScore();
-                    score.setText(blackScore + ":" + redScore);
-                }
+                Play(board.fromXCoordinateToXIndex(e.getX()), board.fromYCoordinateToYIndex(e.getY()));
                 if (!board.isBlackTurn() && !board.isGameEnded())
                     AIPLay();
                 repaint();
