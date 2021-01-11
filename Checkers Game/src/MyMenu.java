@@ -39,10 +39,10 @@ public class MyMenu extends JPanel {
 
     protected void paintComponent(Graphics g) {
         g.drawImage(Choose.background, 0, 0, null);
-        drawTitleFrame(g);
+        DrawTitleFrame(g);
     }
 
-    private void drawTitleFrame(Graphics g) {
+    private void DrawTitleFrame(Graphics g) {
         g.setColor(Choose.myBrown);
         g.fillRect(60, 40, 265, 70);
         g.setColor(Color.BLACK);

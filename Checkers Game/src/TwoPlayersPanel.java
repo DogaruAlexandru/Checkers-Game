@@ -10,14 +10,14 @@ import javax.swing.BorderFactory;
 
 public class TwoPlayersPanel extends JPanel {
     protected MyBoard board;
-    protected  JLabel score;
-    protected  JLabel blackLabel;
-    protected  JLabel redLabel;
+    protected JLabel score;
+    protected JLabel blackLabel;
+    protected JLabel redLabel;
     protected JLabel endLabel;
 
-    protected  JButton restart;
-    protected  JButton reset;
-    protected  JButton back;
+    protected JButton restart;
+    protected JButton reset;
+    protected JButton back;
 
     protected int redScore;
     protected int blackScore;
@@ -67,47 +67,50 @@ public class TwoPlayersPanel extends JPanel {
 
         back.addActionListener(e -> Choose.OpenMenu());
         reset.addActionListener(e -> {
-            resetScore();
+            ResetScore();
             repaint();
         });
         restart.addActionListener(e -> {
-            restart();
+            Restart();
             repaint();
         });
 
+
         addMouseListener(new MouseAdapter() {
             public void mousePressed(MouseEvent e) {
-                if (!board.isGameEnded()) {
-                    if (e.getX() > 70 && e.getY() > 70 && e.getX() < 590 && e.getY() < 590) {
-                        int mouseXIndex = board.fromXCoordinateToXIndex(e.getX());
-                        int mouseYIndex = board.fromYCoordinateToYIndex(e.getY());
-                        if (board.getBoardTable()[mouseXIndex][mouseYIndex].isPossibleMove()) {
-                            if (board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece() != null) {
-                                board.selectPieceToUse(mouseXIndex, mouseYIndex);
-                            } else {
-                                board.executeMove(mouseXIndex, mouseYIndex);
-                            }
-                        } else if (board.getBoardTable()[mouseXIndex][mouseYIndex].isPossibleAttack()) {
-                            board.executeAttack(mouseXIndex, mouseYIndex);
-                        } else {
-                            board.resetFlags();
-                            board.possibilities();
-                        }
-                        if (board.isGameEnded()) {
-                            changeScore();
-                            score.setText(blackScore + ":" + redScore);
-                        }
-                    repaint();
-                    }
-                }
+                Pressing(e);
             }
         });
     }
 
-    public TwoPlayersPanel(boolean b) {
+    protected void Pressing(MouseEvent e) {
+        if (!board.isGameEnded()) {
+            if (e.getX() > 70 && e.getY() > 70 && e.getX() < 590 && e.getY() < 590) {
+                int mouseXIndex = board.fromXCoordinateToXIndex(e.getX());
+                int mouseYIndex = board.fromYCoordinateToYIndex(e.getY());
+                if (board.getBoardTable()[mouseXIndex][mouseYIndex].isPossibleMove()) {
+                    if (board.getBoardTable()[mouseXIndex][mouseYIndex].getPiece() != null) {
+                        board.selectPieceToUse(mouseXIndex, mouseYIndex);
+                    } else {
+                        board.executeMove(mouseXIndex, mouseYIndex);
+                    }
+                } else if (board.getBoardTable()[mouseXIndex][mouseYIndex].isPossibleAttack()) {
+                    board.executeAttack(mouseXIndex, mouseYIndex);
+                } else {
+                    board.resetFlags();
+                    board.possibilities();
+                }
+                if (board.isGameEnded()) {
+                    ChangeScore();
+                    score.setText(blackScore + ":" + redScore);
+                }
+                repaint();
+            }
+        }
     }
 
-    protected void restart() {
+
+    protected void Restart() {
         remove(blackLabel);
         remove(redLabel);
         board = new MyBoard(blackLabel, redLabel);
@@ -119,20 +122,20 @@ public class TwoPlayersPanel extends JPanel {
         endLabel.setVisible(false);
     }
 
-    protected void resetScore() {
+    protected void ResetScore() {
         redScore = 0;
         blackScore = 0;
         score.setText(blackScore + ":" + redScore);
     }
 
-    protected void changeScore() {
+    protected void ChangeScore() {
         if (!board.isBlackTurn())
             ++blackScore;
         else
             ++redScore;
     }
 
-    protected void drawEndScreen(Graphics g) {
+    protected void DrawEndScreen(Graphics g) {
         g.setColor(Color.BLACK);
         g.fillRect(100, 150, 460, 290);
         g.setColor(Choose.myWhite);
@@ -154,6 +157,6 @@ public class TwoPlayersPanel extends JPanel {
         g.drawImage(Choose.background, 0, 0, null);
         board.draw(g);
         if (board.isGameEnded())
-            drawEndScreen(g);
+            DrawEndScreen(g);
     }
 }

@@ -21,7 +21,7 @@ public class Piece {
         this.kinged = kinged;
     }
 
-    public void drawPiece(Graphics g, int x, int y) {
+    public void DrawPiece(Graphics g, int x, int y) {
         if (black) {
             if (kinged)
                 g.drawImage(Choose.blackKingedPiece, x, y, null);

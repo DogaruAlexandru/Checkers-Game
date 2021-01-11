@@ -349,7 +349,7 @@ public class MyBoard {
                 drawBoardTiles(g, xCoordinate, yCoordinate, xIndex, yIndex);
                 drawPossibleBoardTiles(g, xCoordinate, yCoordinate, xIndex, yIndex);
                 if (boardTable[xIndex][yIndex].getPiece() != null)
-                    boardTable[xIndex][yIndex].getPiece().drawPiece(g, xCoordinate, yCoordinate);
+                    boardTable[xIndex][yIndex].getPiece().DrawPiece(g, xCoordinate, yCoordinate);
             }
         g.setColor(Color.BLACK);
         g.drawRect(70, 70, 520, 520);
