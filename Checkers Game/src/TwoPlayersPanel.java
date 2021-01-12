@@ -112,14 +112,8 @@ public class TwoPlayersPanel extends JPanel {
     }
 
     protected void Restart() {
-        remove(blackLabel);
-        remove(redLabel);
         board = new MyBoard(blackLabel, redLabel);
         board.possibilities();
-        blackLabel.setBounds(742, 150, 180, 50);
-        redLabel.setBounds(757, 242, 180, 50);
-        add(blackLabel);
-        add(redLabel);
         endLabel.setVisible(false);
     }
 
